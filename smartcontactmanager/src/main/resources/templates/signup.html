@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${title}"></title>
+</head>
+<body>
+	<section>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 offset-md-2">
+					<div class="my-card mt-3">
+					 
+						
+						<div th:if="${session.message}" class="container">
+            <div th:classappend="${'alert-' + session.message.type}" class="alert text-center" role="alert">
+                <span th:text="${session.message.content}"></span>
+                
+            </div>
+                 <th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+        </div>
+					<div class="container text-center d-flex align-items-center justify-content-center p-4">
+					
+		<img style="width:40px" th:src="@{../image/regicon.png}" alt="" />
+		<h1 class="text-center ml-2">Sign Up Here</h1>
+	</div>
+
+						<form novalidate action="" th:action="@{/do_register}" method="post" th:object="${user}">
+
+							<div class="form-group">
+								<label for="name">Your Name</label> 
+								<input
+								name="name"
+									type="text" class="form-control" 
+									 th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}"
+									 th:field="*{name}"
+									id="name"
+									aria-describedby="emailHelp" placeholder="Enter your name"
+									required
+									th:value="${user.name}" 
+									>
+								
+                            <div th:each="err : ${#fields.errors('name')}" th:text="${err}"></div>
+                        
+							</div>
+							<div class="form-group">
+								<label for="email">Your Email</label> 
+								<input
+								name="email"
+									type="email" class="form-control" id="email"
+									aria-describedby="emailHelp" placeholder="Enter your email"
+									required
+									th:value="${user.email}">
+								
+							</div>
+							<div class="form-group">
+								<label for="password">Password</label> 
+								<input 
+								name="password"
+									type="password" class="form-control" id="password"
+									aria-describedby="emailHelp" placeholder="Enter your password"
+									required >
+								
+							</div>
+							
+							<div class="form-group">
+							  <textarea th:value="${user.about}"name ="about"  id="" rows="10" class="form-control" placeholder="About your Sef"></textarea>
+							</div>
+							
+							<div class="form-group form-check">
+							   <input type="checkbox" name="agreement" class="formcheck" id="agreement">
+							   <label for="agreement">Accepts terms and condition </label>
+							</div>
+							<div class="container text-center">
+							   <button type="submit" class=" btn btn-primary bg-primary"> Submit</button>
+							
+							   <button type="reset" class=" btn btn-warning"> Reset</button>
+							</div>
+							
+						</form>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>

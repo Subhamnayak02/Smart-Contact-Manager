@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="${title}">User Profile</title>
+    <link rel="stylesheet" th:href="@{/static/css/style.css}" />
+</head>
+<body>
+    <section class="profile-section">
+        <div class="profile-card">
+            <div class="profile-header">
+                <img th:src="@{/image/profile.jpg}" alt="Profile Picture" class="profile-img">
+                <h1>User Profile</h1>
+            </div>
+            <div class="profile-body">
+                <h2>User Information</h2>
+                <p><strong>ID:</strong> <span th:text="${user.id}"></span></p>
+                <p><strong>Name:</strong> <span th:text="${user.name}"></span></p>
+                <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
+                <p><strong>Role:</strong> <span th:text="${user.role}"></span></p>
+                <p><strong>Enabled:</strong> <span th:text="${user.enabled} ? 'Yes' : 'No'"></span></p>
+                <p><strong>About:</strong> <span th:text="${user.about}"></span></p>
+            </div>
+            <div class="profile-footer">
+                <a th:href="@{/logout}" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
